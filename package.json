@@ -1,0 +1,36 @@
+{
+  "name": "omnia-contracts",
+  "version": "0.0.0",
+  "scripts": {
+    "truffle:test": "truffle test --network dev",
+    "format": "npx prettier --write .",
+    "format:check": "npx prettier --check .",
+    "lint:solidity": "npx solhint 'src/contracts/**/*.sol'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*": "prettier --write"
+  },
+  "private": true,
+  "dependencies": {
+    "solc": "^0.8.1",
+    "truffle": "^5.1.66",
+    "tslib": "^2.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.0",
+    "chai-as-promised": "^7.1.1",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "mocha": "^8.3.0",
+    "prettier": "2.2.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.5",
+    "solhint": "^3.3.2",
+    "solhint-plugin-prettier": "^0.0.5",
+    "truffle-assertions": "^0.9.2"
+  }
+}

@@ -1,0 +1,7 @@
+# Ignore artifacts:
+build
+.prettierignore
+.gitignore
+debug.log
+.solhintignore
+Dockerfile

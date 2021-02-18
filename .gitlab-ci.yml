@@ -1,0 +1,40 @@
+image: node:14-alpine
+
+stages:
+  - commit
+  - test
+
+format:
+  stage: commit
+  script: npm run format:check
+  only:
+    - master
+
+variables:
+  DOCKER_DRIVER: "overlay2"
+  DOCKER_HOST: tcp://docker:2375
+
+lint:
+  stage: commit
+  before_script:
+    - npm i
+  script: npm run lint:solidity
+  only:
+    - master
+
+solidity:
+  image: docker/compose:1.27.4
+  services:
+    - name: docker:dind
+      alias: localhost
+  stage: test
+  before_script:
+    - docker-compose -v
+    - docker-compose build
+    - echo INFURA=$INFURA >> .env
+    - echo SEED=$SEED >> .env
+  script:
+    - docker-compose up -d ganache
+    - docker-compose up truffle-ci
+  only:
+    - 14-ci-lint-format-jobs
