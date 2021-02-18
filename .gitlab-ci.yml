@@ -37,4 +37,4 @@ solidity:
     - docker-compose up -d ganache
     - docker-compose up truffle-ci
   only:
-    - 14-ci-lint-format-jobs
+    - master
