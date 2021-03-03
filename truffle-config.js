@@ -5,6 +5,12 @@ module.exports = {
   contracts_directory: "./src/contracts",
   migrations_directory: "./migrations",
   contracts_build_directory: "./src/abis",
+  // Config for verification: truffle run verify BEP20Token@{contract-address} --network bsc_testnet
+  plugins: ["truffle-plugin-verify"],
+  api_keys: {
+    bscscan: process.env.BSC_SCAN_KEY,
+    etherscan: process.env.ETHER_SCAN_KEY,
+  },
   networks: {
     dev: {
       host: "ganache", // this is the trick to get truffle container working with gnache one!
