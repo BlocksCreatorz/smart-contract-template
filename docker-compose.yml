@@ -8,7 +8,7 @@ services:
       - .:/home
     ports:
       - 8545:8545
-    command: "-a 5 -e 500 -d -m ${SEED} -f ${INFURA}"
+    command: "-a 5 -e 500 -d -m ${SEED} -f ${FORKED_URL}"
 
   truffle:
     build: .
@@ -28,6 +28,6 @@ services:
       - .:/home
     tty: true
     command: >
-      sh -c "npm i chai chai-as-promised mocha && 
-             truffle migrate --reset --compile-all --network dev && 
+      sh -c "npm i chai chai-as-promised mocha &&
+             truffle migrate --reset --compile-all --network dev &&
              truffle test --network dev"

@@ -31,7 +31,7 @@ solidity:
   before_script:
     - docker-compose -v
     - docker-compose build
-    - echo INFURA=$INFURA >> .env
+    - echo FORKED_URL=$FORKED_URL >> .env
     - echo SEED=$SEED >> .env
   script:
     - docker-compose up -d ganache

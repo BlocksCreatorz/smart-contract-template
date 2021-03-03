@@ -17,7 +17,7 @@ module.exports = {
           mnemonic: {
             phrase: process.env.SEED,
           },
-          provider: process.env.KOVAN,
+          provider: process.env.FORKED_URL,
           addressIndex: 0,
         });
       },
