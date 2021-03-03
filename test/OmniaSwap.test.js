@@ -1,23 +1,22 @@
 // Created contracts
 const OmniaSwap = artifacts.require("OmniaSwap");
 const ForceSend = artifacts.require("ForceSend");
-// // To import ABI
-// const DAI = require("../src/abis/Dai.json");
+const DAI = artifacts.require("DAI");
 //Module loading
 require("chai").use(require("chai-as-promised")).should();
 const truffleAssert = require("truffle-assertions");
 const Utils = require("./Utils.js");
 
 contract("OmniaSwap", (accounts) => {
-  let DAIContract;
+  let dai;
   const DAIaddress = "0x6b175474e89094c44da98b954eedeac495271d0f";
   const oracleAddress = "0x07E4120dD7411a49e091a20FA0be33a183C35d60";
 
   before(async () => {
     // Load Contracts
     omniaSwap = await OmniaSwap.new(oracleAddress);
-    DAIContract = new web3.eth.Contract(DAI.abi, DAIaddress);
-    // var receipt = web3.eth.getTransactionReceipt(trHash);
+    // Instanciate DAI
+    dai = await DAI.at(DAIaddress);
   });
 
   describe.skip("DAI minting", async () => {
@@ -26,18 +25,20 @@ contract("OmniaSwap", (accounts) => {
       // Uses ForceSend contract, otherwise just sending
       // a normal tx will revert.
       const forceSend = await ForceSend.new();
-      await forceSend.go(DAIaddress, { value: Utils.toWei("1") });
-      const ethBalance = await Utils.getETHBalance(DAIaddress);
-      assert.notEqual(Utils.fromWei(ethBalance), "0");
+      await forceSend.go(dai.address, { value: Utils.toWei("1") });
+      let ethBalance = await Utils.getETHBalance(dai.address);
+      ethBalance = parseFloat(Utils.fromWei(ethBalance));
+      expect(ethBalance).to.be.gte(1);
     });
 
     it("transfers 10 DAI to accounts[1]", async () => {
-      await DAIContract.methods
-        .transfer(accounts[1], Utils.toWei("10"))
-        .send({ from: DAIaddress });
+      await truffleAssert.passes(
+        dai.transfer(accounts[1], Utils.toWei("10"), { from: DAIaddress })
+      );
 
-      const DAIBalance = await Utils.getDAIBalance(accounts[1]);
-      assert.notEqual(Utils.fromWei(DAIBalance), "0");
+      let DAIBalance = await Utils.getDAIBalance(accounts[1]);
+      DAIBalance = parseFloat(Utils.fromWei(DAIBalance));
+      expect(DAIBalance).to.be.gte(1);
     });
   });
 });
