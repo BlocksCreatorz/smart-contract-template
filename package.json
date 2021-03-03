@@ -17,10 +17,10 @@
   },
   "private": true,
   "dependencies": {
+    "@truffle/hdwallet-provider": "^1.2.2",
     "dotenv": "^8.2.0",
     "solc": "^0.8.1",
     "truffle": "^5.1.66",
-    "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.2.9"
   },
   "devDependencies": {
