@@ -13,7 +13,13 @@ module.exports = {
     },
     kovan: {
       provider: function () {
-        return new HDWalletProvider(process.env.SEED, process.env.KOVAN, 0, 2);
+        return new HDWalletProvider({
+          mnemonic: {
+            phrase: process.env.SEED,
+          },
+          provider: process.env.KOVAN,
+          addressIndex: 0,
+        });
       },
       network_id: 42,
       gas: 5000000,
