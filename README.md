@@ -8,3 +8,6 @@ Linter: solhint
 Formatter: prettier
 Husky: do actions before commit, if fails doesn't commit
 Lint-staged: do actions only on modified files
+
+## Derivation path to get right address
+Using Ledger path: `m/44'/60'/4'/0/0` where `4` is the index of the wanted address. Check [this](https://github.com/ethereum/EIPs/issues/84) for more info.
