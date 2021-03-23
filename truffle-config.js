@@ -25,6 +25,9 @@ module.exports = {
           },
           providerOrUrl: process.env.KOVAN,
           addressIndex: 0,
+          //// Using Ledger path
+          //// 4 is the index of 0x....81C6 => CreateLinX: Deployer 1
+          // derivationPath: "m/44'/60'/4'/0/0",
           shareNonce: true,
         }),
       network_id: 42,
