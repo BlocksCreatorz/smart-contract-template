@@ -17,8 +17,10 @@
   },
   "private": true,
   "dependencies": {
+    "@openzeppelin/contracts": "^4.0.0-rc.0",
     "@truffle/hdwallet-provider": "^1.2.2",
     "dotenv": "^8.2.0",
+    "pify": "^5.0.0",
     "solc": "^0.8.1",
     "truffle": "^5.1.66",
     "web3": "^1.2.9"

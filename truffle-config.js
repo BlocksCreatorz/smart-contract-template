@@ -1,4 +1,4 @@
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 module.exports = {
@@ -12,31 +12,32 @@ module.exports = {
     etherscan: process.env.ETHER_SCAN_KEY,
   },
   networks: {
-    dev: {
+    development: {
       host: "ganache", // this is the trick to get truffle container working with gnache one!
       port: 8545,
       network_id: "*",
     },
     kovan: {
-      provider: function () {
-        return new HDWalletProvider({
+      provider: () =>
+        new HDWalletProvider({
           mnemonic: {
             phrase: process.env.SEED,
           },
-          provider: process.env.FORKED_URL,
+          providerOrUrl: process.env.KOVAN,
           addressIndex: 0,
-        });
-      },
+          shareNonce: true,
+        }),
       network_id: 42,
       gas: 5000000,
       gasPrice: 25000000000,
       skipDryRun: true,
+      production: true,
     },
   },
   compilers: {
     solc: {
       // To avoid running out of gas: https://github.com/trufflesuite/truffle/issues/1308
-      version: "^0.8.0",
+      version: "0.8.1",
       optimizer: {
         enabled: true,
         runs: 200,

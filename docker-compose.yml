@@ -18,7 +18,7 @@ services:
       - .:/home
     tty: true
     command: >
-      sh -c "truffle test --network dev"
+      sh -c "truffle test"
 
   truffle-ci:
     build: .
@@ -29,5 +29,5 @@ services:
     tty: true
     command: >
       sh -c "npm i chai chai-as-promised mocha &&
-             truffle migrate --reset --compile-all --network dev &&
-             truffle test --network dev"
+             truffle migrate --reset --compile-all &&
+             truffle test"
