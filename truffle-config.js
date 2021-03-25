@@ -40,7 +40,7 @@ module.exports = {
   compilers: {
     solc: {
       // To avoid running out of gas: https://github.com/trufflesuite/truffle/issues/1308
-      version: "0.8.1",
+      version: "0.8.3",
       optimizer: {
         enabled: true,
         runs: 200,
