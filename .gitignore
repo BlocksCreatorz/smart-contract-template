@@ -49,6 +49,5 @@ Thumbs.db
 # Secrets
 .env
 
-#Not always needed
-/src/abis/**
-!/src/abis/DAI.json
+# Openzeppelin
+.openzeppelin/unknown-*.json

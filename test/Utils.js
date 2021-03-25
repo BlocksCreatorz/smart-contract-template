@@ -1,9 +1,9 @@
 // Utils
 function toWei(n) {
-  return web3.utils.toWei(n, "ether");
+  return web3.utils.toWei(n.toString(), "ether");
 }
 function fromWei(n) {
-  return web3.utils.fromWei(n);
+  return web3.utils.fromWei(n.toString());
 }
 async function getDAIBalance(account) {
   return DAIContract.methods.balanceOf(account).call();

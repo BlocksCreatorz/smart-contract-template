@@ -11,3 +11,24 @@ Lint-staged: do actions only on modified files
 
 ## Derivation path to get right address
 Using Ledger path: `m/44'/60'/4'/0/0` where `4` is the index of the wanted address. Check [this](https://github.com/ethereum/EIPs/issues/84) for more info.
+
+## What is a proxy?
+
+A proxy is a contract that delegates all of its calls to a second contract, named an implementation contract. A proxy can be upgraded by its admin to use a different implementation contract.
+**All state and funds are held in the proxy.**
+
+## Migration to upgrade proxy
+
+In fact all files are needed: the one that has deployed the base contract & the new one.
+upgradeProxy() manage on its own which migration to use for update.
+
+## Using proxy in the front or in tests
+
+- Latest implementation ABI contract MUST be use in the front and test AT **proxy.address**
+
+```
+const v1 = await V1.at(proxy.address)
+v1.oldMethod()
+const v2 = await V2.at(proxy.address)
+v2.newMethod()
+```
